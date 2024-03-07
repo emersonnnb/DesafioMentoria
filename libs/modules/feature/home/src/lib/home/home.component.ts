@@ -3,12 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { ProductSearchService, RecommendedProductsService } from 'product-data-access';
 
 export interface User {
-  id?: string;
-  name?: string;
-  createdAt?: Date;
-  email?: string;
-  avatar?: string;
-  biography?: string;
+  id: string;
+  name: string;
+  createdAt: Date;
+  email: string;
+  avatar: string;
+  biography: string;
 }
 
 @Component({
