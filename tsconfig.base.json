@@ -22,7 +22,8 @@
       "product-data-access": ["libs/modules/data-access/product/src/index.ts"],
       "product-detail": ["libs/modules/feature/product/detail/src/index.ts"],
       "product-search": ["libs/modules/feature/product/search/src/index.ts"],
-      "product-ui": ["libs/modules/ui/product/src/index.ts"]
+      "product-ui": ["libs/modules/ui/product/src/index.ts"],
+      "user-data-access": ["libs/modules/data-access/user/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
