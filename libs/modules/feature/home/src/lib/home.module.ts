@@ -5,6 +5,9 @@ import { ProductCardComponent } from 'product-ui';
 import { LogDirective } from './directives/log/log.directive';
 import { HomeComponent } from './home/home.component';
 import { homeRoutes } from './lib.routes';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   imports: [
@@ -12,6 +15,9 @@ import { homeRoutes } from './lib.routes';
     RouterModule.forChild(homeRoutes),
     ProductCardComponent,
     LogDirective,
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule
   ],
   declarations: [HomeComponent],
 })

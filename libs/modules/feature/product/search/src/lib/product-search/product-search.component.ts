@@ -5,8 +5,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
-import { Product } from 'modules/data-access/product/src/lib/models/product.model';
-import { ProductSearchService } from 'product-data-access';
+import { Product, ProductSearchService } from 'product-data-access';
 import {
   Observable,
   debounceTime,

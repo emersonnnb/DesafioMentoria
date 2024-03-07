@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '../../models/product.model';
+import { User } from 'libs/modules/feature/home/src/lib/home/home.component';
 
 @Injectable({
   providedIn: 'root',
@@ -21,5 +22,9 @@ export class ProductSearchService {
 
   getById(id: string): Observable<Product> {
     return this.http.get<Product>(`${this.apiUrl}/products/${id}`);
+  }
+
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/users`);
   }
 }
