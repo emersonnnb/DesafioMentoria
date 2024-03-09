@@ -1,4 +1,4 @@
-<ng-container *ngIf="users$ | async as dataSource">
+<ng-container *ngIf="(users$ | async) as dataSource">
   <table
     mat-table
     [dataSource]="dataSource"

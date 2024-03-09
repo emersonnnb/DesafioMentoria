@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatTableModule} from '@angular/material/table';
 import { UserSearchService } from 'user-data-access';
-import { User } from 'libs/modules/data-access/user/src/lib/models/user.model';
 
 @Component({
   selector: 'lib-user-search',
@@ -13,7 +12,6 @@ import { User } from 'libs/modules/data-access/user/src/lib/models/user.model';
 })
 export class UserSearchComponent {
   displayedColumns: string[] = ['id', 'avatar', 'name', 'email', 'biography'];
-  dataSource!: User[];
   users$ = this.userSearchService.getUsers();
 
   constructor(private userSearchService: UserSearchService) {}
