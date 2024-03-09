@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatTableModule} from '@angular/material/table';
 import { UserSearchService } from 'user-data-access';
-import { Observable } from 'rxjs';
-import { User } from 'libs/modules/data-access/user/src/lib/models/user.model';
+import { DATATABLE, DATATABLEKEY } from '../constant/user-list.const';
 
 @Component({
   selector: 'lib-user-search',
@@ -12,19 +11,11 @@ import { User } from 'libs/modules/data-access/user/src/lib/models/user.model';
   templateUrl: './user-search.component.html',
   styleUrl: './user-search.component.scss',
 })
-export class UserSearchComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'avatar', 'name', 'email', 'biography'];
-  dataSource!: User[];
-  users$!: Observable<User[]>;
+export class UserSearchComponent {
+  displayedColumns = DATATABLE;
+  displayedColumnKeys = DATATABLEKEY;
+
+  users$ = this.userSearchService.getUsers();
 
   constructor(private userSearchService: UserSearchService) {}
-
-  ngOnInit(): void {
-    this.users$ = this.userSearchService.getUsers();
-
-    this.users$.subscribe((result) => {
-      this.dataSource = result;
-    });
-    
-  }
 }
