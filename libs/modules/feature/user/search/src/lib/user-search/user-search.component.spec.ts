@@ -63,7 +63,7 @@ describe('UserSearchComponent', () => {
     const users: HTMLElement[] =
       fixture.nativeElement.querySelectorAll('tbody tr');
 
-    mockUsers.filter((el) => el.name === input);
+    mockUsers.filter((el) => el.name.includes(input));
 
     expect(users.length).toBe(mockUsers.length);
   });
