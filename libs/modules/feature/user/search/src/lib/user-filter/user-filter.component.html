@@ -1,18 +1,13 @@
 <form class="example-form">
-  <mat-form-field class="example-full-width">
-    <mat-label>Buscar usuários</mat-label>
+  <mat-form-field floatLabel="always" class="example-full-width"  >
+    <mat-label>Filtro</mat-label>
     <input
       type="text"
-      placeholder="Buscar usuários"
+      placeholder="Digita nome, e-mail, palavras chaves"
       aria-label="Digite o usuário que você quer encontrar"
       matInput
       [formControl]="control"
-      [matAutocomplete]="auto"
-    />
-    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-      <mat-option *ngFor="let data of dataSource.data" [value]="data.name">
-        {{ data.name }}
-      </mat-option>
-    </mat-autocomplete>
+      
+    />    
   </mat-form-field>
 </form>

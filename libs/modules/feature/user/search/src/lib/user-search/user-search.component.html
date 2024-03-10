@@ -1,27 +1,16 @@
-<lib-user-filter
-  [dataSource]="dataSource"
-  (filterChange)="onFilterChange($event)"
-></lib-user-filter>
+<h1>Busca de funcionários</h1>
 
-<table
-  mat-table
-  matSort
-  #sort="matSort"
-  [dataSource]="dataSource"
-  class="mat-elevation-z8 user-table"
->
-  @for (column of displayedColumns; track column) {
+<lib-user-filter [dataSource]="dataSource" (filterChange)="onFilterChange($event)"></lib-user-filter>
+<div class="table mat-elevation-z8 ">
+  <table mat-table matSort #sort="matSort" [dataSource]="dataSource" class="user-table">
+    @for (column of displayedColumns; track column) {
   <ng-container [matColumnDef]="column.dataKey">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>
       {{ column.title }}
     </th>
     <td mat-cell *matCellDef="let element">
       @if (element[column.dataKey].includes('https://')) {
-      <img
-        mat-card-image
-        [src]="element[column.dataKey]"
-        [alt]="element[column.title]"
-      />
+      <img mat-card-image [src]="element[column.dataKey]" [alt]="element[column.title]" />
       } @else {
       {{ element[column.dataKey] }}
       }
@@ -34,15 +23,11 @@
 
   <!-- Row shown when there is no matching data. -->
   <tr class="mat-row" *matNoDataRow>
-    <td class="mat-cell" colspan="4">
-      No data matching the filter "{{ input }}"
+    <td class="mat-cell text" colspan="6">
+     Nenhum resultado encontra para  "{{ input }}"
     </td>
   </tr>
 </table>
-<mat-paginator
-  #paginator
-  [pageSizeOptions]="[3]"
-  showFirstLastButtons
-  aria-label="Select page of periodic elements"
->
+<mat-paginator #paginator [pageSizeOptions]="[3, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
 </mat-paginator>
+</div>
