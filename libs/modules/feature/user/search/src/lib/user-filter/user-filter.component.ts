@@ -32,7 +32,6 @@ export class UserFilterComponent implements OnInit {
     this.control.valueChanges
       .pipe(debounceTime(400), distinctUntilChanged())
       .subscribe((filterValue) => {
-        this.dataSource.filter = filterValue.trim().toLowerCase();
         this.filterChange.emit(filterValue);
       });
   }

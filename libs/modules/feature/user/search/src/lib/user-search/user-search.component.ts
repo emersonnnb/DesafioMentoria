@@ -5,7 +5,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 
 import { UserSearchService } from 'user-data-access';
 import { DATATABLE, DATATABLEKEY } from '../constant/user-list.const';
@@ -19,6 +19,7 @@ import { UserFilterComponent } from '../user-filter/user-filter.component';
     CommonModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSortModule,
     MatInputModule,
     MatFormFieldModule,
     UserFilterComponent,
@@ -49,8 +50,9 @@ export class UserSearchComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  onFilterChange(event: string) {
-    this.input = event;
+  onFilterChange(input: string) {
+    this.dataSource.filter = input.trim().toLowerCase();
+    this.input = input;
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();

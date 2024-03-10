@@ -6,6 +6,7 @@
 <table
   mat-table
   matSort
+  #sort="matSort"
   [dataSource]="dataSource"
   class="mat-elevation-z8 user-table"
 >
@@ -39,6 +40,7 @@
   </tr>
 </table>
 <mat-paginator
+  #paginator
   [pageSizeOptions]="[3]"
   showFirstLastButtons
   aria-label="Select page of periodic elements"
