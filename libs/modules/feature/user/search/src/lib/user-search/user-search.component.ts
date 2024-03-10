@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, OnInit, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -28,29 +29,36 @@ import { UserFilterComponent } from '../user-filter/user-filter.component';
   styleUrl: './user-search.component.scss',
 })
 export class UserSearchComponent implements OnInit, AfterViewInit {
-  displayedColumns = DATATABLE;
-  displayedColumnKeys = DATATABLEKEY;
-  dataSource = new MatTableDataSource<User>();
+  public readonly displayedColumns = DATATABLE;
+  public readonly displayedColumnKeys = DATATABLEKEY;
+  public dataSource = new MatTableDataSource<User>();
+  private destroyRef = inject(DestroyRef)
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) readonly paginator!: MatPaginator;
+  @ViewChild(MatSort) readonly sort!: MatSort;
 
   public input!: string;
 
   constructor(private userSearchService: UserSearchService) {}
 
-  ngOnInit(): void {
-    this.userSearchService.getUsers().subscribe((res) => {
+  public ngOnInit(): void {
+    this.loadUsers();
+  }
+
+  private loadUsers() {
+    this.userSearchService.getUsers()
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe(res => {
       this.dataSource.data = res;
     });
   }
 
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  onFilterChange(input: string) {
+  public onFilterChange(input: string) {
     this.dataSource.filter = input.trim().toLowerCase();
     this.input = input;
 

@@ -20,7 +20,10 @@
           "apps/ecommerce-admin/src/favicon.ico",
           "apps/ecommerce-admin/src/assets"
         ],
-        "styles": ["apps/ecommerce-admin/src/styles.scss"],
+        "styles": [
+          "@angular/material/prebuilt-themes/deeppurple-amber.css",
+          "apps/ecommerce-admin/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
