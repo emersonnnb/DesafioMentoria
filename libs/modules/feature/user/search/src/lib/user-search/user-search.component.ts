@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, DestroyRef, OnInit, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -24,6 +25,7 @@ import { UserFilterComponent } from '../user-filter/user-filter.component';
     MatInputModule,
     MatFormFieldModule,
     UserFilterComponent,
+    NgOptimizedImage
   ],
   templateUrl: './user-search.component.html',
   styleUrl: './user-search.component.scss',
@@ -32,7 +34,7 @@ export class UserSearchComponent implements OnInit, AfterViewInit {
   public readonly displayedColumns = DATATABLE;
   public readonly displayedColumnKeys = DATATABLEKEY;
   public dataSource = new MatTableDataSource<User>();
-  private destroyRef = inject(DestroyRef)
+  private destroyRef = inject(DestroyRef);
 
   @ViewChild(MatPaginator) readonly paginator!: MatPaginator;
   @ViewChild(MatSort) readonly sort!: MatSort;
