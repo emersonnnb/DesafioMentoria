@@ -6,7 +6,7 @@ import {
   } from '@angular/core/testing';
   import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UserFilterComponent } from './user-filter.component';
-import { UserListComponent } from '../user-search/user-list.component';
+import { UserListComponent } from '../user-list/user-list.component';
 import { mockUsers } from 'user-data-access';
 import { MatTableDataSource } from '@angular/material/table';
   
