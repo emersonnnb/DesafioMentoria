@@ -1,6 +1,6 @@
-<header class="header">
-  <a routerLink="/" class="header__logo">
-    <h1 class="header__title">{{ title }}</h1>
+<header class="header" [ngClass]="type">
+  <a routerLink="/" class="header__logo" alt="Link para Home Page">
+    <h1 class="header__title">{{ titleHeader }}</h1>
   </a>
   <ng-content></ng-content>
   <ng-content select="[right]"></ng-content>

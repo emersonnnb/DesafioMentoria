@@ -1,11 +1,10 @@
-<h1>Busca de usuários</h1>
-
+<h2 class="title">Busca de usuários</h2>
 <lib-user-filter
   [dataSource]="dataSource"
   (filterChange)="onFilterChange($event)"
   aria-label="Filtro de usuários"
 ></lib-user-filter>
-
+<h3 class="title">Informações dos usuários</h3>
 <div class="table mat-elevation-z8">
   <table
     mat-table
@@ -21,18 +20,19 @@
     </caption>
     @for (column of displayedColumns; track column.dataKey) {
     <ng-container [matColumnDef]="column.dataKey">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      <th class="th-header" mat-header-cell *matHeaderCellDef mat-sort-header>
         {{ column.title }}
       </th>
-      <td mat-cell *matCellDef="let element">
+      <td class="td-space" mat-cell *matCellDef="let element; let index = $index " [tabindex]="index">
         @if (element[column.dataKey].includes('https://')) {
-        <img
-          mat-card-image
-          [src]="element[column.dataKey]"
-          [alt]="element[column.title]"
-        />
+          <img
+            mat-card-image
+            [src]="element[column.dataKey]"
+            [alt]="element[column.dataKey]"
+            class="img-round img-full"
+          />
         } @else {
-        {{ element[column.dataKey] }}
+          {{ element[column.dataKey] }}
         }
       </td>
     </ng-container>

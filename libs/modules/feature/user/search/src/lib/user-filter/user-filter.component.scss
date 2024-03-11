@@ -1,7 +1,15 @@
+:host{
+  --custom-transform: translateY(-125%) scale(0.90);
+}
+
 .example-form {
     width: 100%;
-    margin-top: 1%;
-  }
+    margin-top: 0.5rem;
+}
+
+label{
+  transform: var(--custom-transform, translateY(-125%) scale(0.90));
+}
   
   .example-full-width {
     width: 100%;
