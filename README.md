@@ -59,3 +59,19 @@ Exemplos:
 npx nx affected:test
 npx nx affected:graph
 ```
+
+## Graph Monorepo
+![alt text](https://github.com/emersonnnb/DesafioMentoria/blob/Master/apps/ecommerce-admin/src/assets/graph.png?raw=true)
+
+## E-commerce Painel Administrativo
+
+Nesta área é possível acessar a lista completa de usuários da plataforma do e-commerce para administração.
+A funcionalidade conta com uma busca por todos as colunas da tabela de usuários bem como paginação.
+
+Foi utilizada a estrutura e o layout  do e-commerce alterando ele para monorepo.
+Seguindo o padrão do sistema, os serviços e componentes possuem testes unitários em Jest.
+
+
+**Libs desenvolvidas:**
+- data-access/user
+- feature/user
