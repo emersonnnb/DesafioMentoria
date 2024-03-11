@@ -16,7 +16,7 @@ describe('HeaderComponent', () => {
 
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
-    component.title = mockTitle;
+    component.titleHeader = mockTitle;
     fixture.detectChanges();
   });
 
@@ -29,7 +29,7 @@ describe('HeaderComponent', () => {
       fixture.nativeElement.querySelector('header');
     expect(header.textContent).toBe(mockTitle);
 
-    component.title = 'Other title';
+    component.titleHeader = 'Other title';
     fixture.detectChanges();
     expect(header.textContent).toBe('Other title');
   });
