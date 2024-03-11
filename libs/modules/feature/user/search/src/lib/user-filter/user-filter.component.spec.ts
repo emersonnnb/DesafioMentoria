@@ -6,7 +6,7 @@ import {
   } from '@angular/core/testing';
   import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UserFilterComponent } from './user-filter.component';
-import { UserSearchComponent } from '../user-search/user-search.component';
+import { UserListComponent } from '../user-search/user-list.component';
 import { mockUsers } from 'user-data-access';
 import { MatTableDataSource } from '@angular/material/table';
   
@@ -16,7 +16,7 @@ import { MatTableDataSource } from '@angular/material/table';
   
     beforeEach(async () => {
       await TestBed.configureTestingModule({
-        imports: [UserFilterComponent, UserSearchComponent, NoopAnimationsModule],
+        imports: [UserFilterComponent, UserListComponent, NoopAnimationsModule],
       }).compileComponents();
   
       fixture = TestBed.createComponent(UserFilterComponent);

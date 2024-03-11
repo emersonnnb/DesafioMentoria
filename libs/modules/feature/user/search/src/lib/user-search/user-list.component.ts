@@ -27,10 +27,10 @@ import { UserFilterComponent } from '../user-filter/user-filter.component';
     UserFilterComponent,
     NgOptimizedImage
   ],
-  templateUrl: './user-search.component.html',
-  styleUrl: './user-search.component.scss',
+  templateUrl: './user-list.component.html',
+  styleUrl: './user-list.component.scss',
 })
-export class UserSearchComponent implements OnInit, AfterViewInit {
+export class UserListComponent implements OnInit, AfterViewInit {
   public readonly displayedColumns = DATATABLE;
   public readonly displayedColumnKeys = DATATABLEKEY;
   public dataSource = new MatTableDataSource<User>();

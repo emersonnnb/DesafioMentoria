@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { UserSearchComponent } from './user-search.component';
+import { UserListComponent } from './user-list.component';
 import { UserSearchService, mockUsers } from 'user-data-access';
 import { of } from 'rxjs';
 import { UserFilterComponent } from '../user-filter/user-filter.component';
 import { By } from '@angular/platform-browser';
 
-describe('UserSearchComponent', () => {
-  let component: UserSearchComponent;
-  let fixture: ComponentFixture<UserSearchComponent>;
+describe('UserListComponent', () => {
+  let component: UserListComponent;
+  let fixture: ComponentFixture<UserListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UserSearchComponent, UserFilterComponent, NoopAnimationsModule],
+      imports: [UserListComponent, UserFilterComponent, NoopAnimationsModule],
       providers: [
         {
           provide: UserSearchService,
@@ -22,16 +22,16 @@ describe('UserSearchComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(UserSearchComponent);
+    fixture = TestBed.createComponent(UserListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it(`#should create ${UserSearchComponent.name}`, () => {
+  it(`#should create ${UserListComponent.name}`, () => {
     expect(component).toBeTruthy();
   });
 
-  it(`#${UserSearchComponent.prototype.ngOnInit.name} should fetch users from ${UserSearchComponent.name} on initialization`, () => {
+  it(`#${UserListComponent.prototype.ngOnInit.name} should fetch users from ${UserListComponent.name} on initialization`, () => {
     component.ngOnInit();
 
     const users: HTMLElement[] =
@@ -40,7 +40,7 @@ describe('UserSearchComponent', () => {
     expect(users.length).toBe(mockUsers.length);
   });
 
-  it(`#${UserSearchComponent.prototype.ngAfterViewInit.name} initialize the filter and table pagination`, () => {
+  it(`#${UserListComponent.prototype.ngAfterViewInit.name} initialize the filter and table pagination`, () => {
     component.sort.active = 'id';
     component.sort.direction = 'desc';
     component.sort.sortChange.emit({
@@ -57,7 +57,7 @@ describe('UserSearchComponent', () => {
     expect(+user.textContent!).toBe(mockUsers.length);
   });
 
-  it(`#${UserSearchComponent.prototype.onFilterChange.name} should search for the user entered.`, () => {
+  it(`#${UserListComponent.prototype.onFilterChange.name} should search for the user entered.`, () => {
     const input: string = 'Rebecca';
     component.onFilterChange(input);
 
