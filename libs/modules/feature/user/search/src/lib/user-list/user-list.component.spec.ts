@@ -4,7 +4,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UserListComponent } from './user-list.component';
 import { UserSearchService, mockUsers } from 'user-data-access';
 import { of } from 'rxjs';
-import { UserFilterComponent } from '../user-filter/user-filter.component';
+import { UserSearchComponent } from '../user-search/user-search.component';
 import { By } from '@angular/platform-browser';
 
 describe('UserListComponent', () => {
@@ -13,7 +13,7 @@ describe('UserListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UserListComponent, UserFilterComponent, NoopAnimationsModule],
+      imports: [UserListComponent, UserSearchComponent, NoopAnimationsModule],
       providers: [
         {
           provide: UserSearchService,
@@ -74,11 +74,11 @@ describe('UserListComponent', () => {
     expect(users.length).toBe(mockUsers.length);
   });
 
-  it(`#should filter the table based on the value of ${UserFilterComponent.name}`, () => {
+  it(`#should filter the table based on the value of ${UserSearchComponent.name}`, () => {
     const filterValue: string = 'Rebecca';
-    const userFilterComponent = fixture.debugElement.query(By.directive(UserFilterComponent));
+    const UserSearchComponent = fixture.debugElement.query(By.directive(UserSearchComponent));
   
-    userFilterComponent.triggerEventHandler('filterChange', filterValue);
+    UserSearchComponent.triggerEventHandler('filterChange', filterValue);
   
     fixture.detectChanges();
 

@@ -5,21 +5,21 @@ import {
     tick,
   } from '@angular/core/testing';
   import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { UserFilterComponent } from './user-filter.component';
+import { UserSearchComponent } from './user-search.component';
 import { UserListComponent } from '../user-list/user-list.component';
 import { mockUsers } from 'user-data-access';
 import { MatTableDataSource } from '@angular/material/table';
   
-  describe('UserFilterComponent', () => {
-    let component: UserFilterComponent;
-    let fixture: ComponentFixture<UserFilterComponent>;
+  describe('UserSearchComponent', () => {
+    let component: UserSearchComponent;
+    let fixture: ComponentFixture<UserSearchComponent>;
   
     beforeEach(async () => {
       await TestBed.configureTestingModule({
-        imports: [UserFilterComponent, UserListComponent, NoopAnimationsModule],
+        imports: [UserSearchComponent, UserListComponent, NoopAnimationsModule],
       }).compileComponents();
   
-      fixture = TestBed.createComponent(UserFilterComponent);
+      fixture = TestBed.createComponent(UserSearchComponent);
       component = fixture.componentInstance;
 
       component.dataSource = new MatTableDataSource(mockUsers);
@@ -27,11 +27,11 @@ import { MatTableDataSource } from '@angular/material/table';
       fixture.detectChanges();
     });
   
-    it(`#should create ${UserFilterComponent.name}`, () => {
+    it(`#should create ${UserSearchComponent.name}`, () => {
       expect(component).toBeTruthy();
     });
   
-    it(`#${UserFilterComponent.name} should debounce when input field is changed`, fakeAsync(() => {
+    it(`#${UserSearchComponent.name} should debounce when input field is changed`, fakeAsync(() => {
         const name: string = 'li';
         const input: HTMLInputElement =
           fixture.nativeElement.querySelector('input');
@@ -43,7 +43,7 @@ import { MatTableDataSource } from '@angular/material/table';
       expect(component.filterChange.emit).toHaveBeenCalledWith(input.value);
     }));
   
-    it(`#${UserFilterComponent.name} should search multiple times`, fakeAsync(() => {
+    it(`#${UserSearchComponent.name} should search multiple times`, fakeAsync(() => {
         const name1: string = 'Rebecca';
         const name2: string = 'Kuhic';
       const input: HTMLInputElement =
@@ -62,7 +62,7 @@ import { MatTableDataSource } from '@angular/material/table';
       expect(component.filterChange.emit).toHaveBeenCalledTimes(2);
     }));
   
-    it(`#${UserFilterComponent.name} should prevent identical emissions`, fakeAsync(() => {
+    it(`#${UserSearchComponent.name} should prevent identical emissions`, fakeAsync(() => {
         const name: string = 'Kuhic';
       const input: HTMLInputElement =
         fixture.nativeElement.querySelector('input');

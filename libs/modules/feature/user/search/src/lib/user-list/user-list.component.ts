@@ -12,7 +12,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { UserSearchService } from 'user-data-access';
 import { DATATABLE, DATATABLEKEY } from '../constant/user-list.const';
 import { User } from 'libs/modules/data-access/user/src/lib/models/user.model';
-import { UserFilterComponent } from '../user-filter/user-filter.component';
+import { UserSearchComponent } from '../user-search/user-search.component';
 
 @Component({
   selector: 'lib-user-search',
@@ -24,7 +24,7 @@ import { UserFilterComponent } from '../user-filter/user-filter.component';
     MatSortModule,
     MatInputModule,
     MatFormFieldModule,
-    UserFilterComponent,
+    UserSearchComponent,
     NgOptimizedImage
   ],
   templateUrl: './user-list.component.html',

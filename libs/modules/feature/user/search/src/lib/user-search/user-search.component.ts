@@ -19,10 +19,10 @@ import { MatTableDataSource } from '@angular/material/table';
     MatFormFieldModule,
     MatAutocompleteModule,
   ],
-  templateUrl: './user-filter.component.html',
-  styleUrl: './user-filter.component.scss',
+  templateUrl: './user-search.component.html',
+  styleUrl: './user-search.component.scss',
 })
-export class UserFilterComponent implements OnInit {
+export class UserSearchComponent implements OnInit {
   @Input() dataSource!: MatTableDataSource<User>;
   @Output() filterChange = new EventEmitter<string>();
 
