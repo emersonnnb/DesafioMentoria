@@ -5,6 +5,7 @@ import { UserSearchComponent } from './user-search.component';
 import { UserSearchService, mockUsers } from 'user-data-access';
 import { of } from 'rxjs';
 import { UserFilterComponent } from '../user-filter/user-filter.component';
+import { By } from '@angular/platform-browser';
 
 describe('UserSearchComponent', () => {
   let component: UserSearchComponent;
@@ -63,8 +64,24 @@ describe('UserSearchComponent', () => {
     const users: HTMLElement[] =
       fixture.nativeElement.querySelectorAll('tbody tr');
 
-    mockUsers.filter((el) => el.name.includes(input));
+    mockUsers.filter((el) => 
+      el.name.includes(input) ||
+      el.id.includes(input) ||
+      el.biography.includes(input) ||
+      el.avatar.includes(input) ||
+      el.email.includes(input));
 
     expect(users.length).toBe(mockUsers.length);
+  });
+
+  it(`#should filter the table based on the value of ${UserFilterComponent.name}`, () => {
+    const filterValue: string = 'Rebecca';
+    const userFilterComponent = fixture.debugElement.query(By.directive(UserFilterComponent));
+  
+    userFilterComponent.triggerEventHandler('filterChange', filterValue);
+  
+    fixture.detectChanges();
+
+    expect(component.dataSource.filter).toBe(filterValue.trim().toLowerCase());
   });
 });

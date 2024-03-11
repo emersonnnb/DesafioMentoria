@@ -53,12 +53,11 @@ import { MatTableDataSource } from '@angular/material/table';
       input.dispatchEvent(new Event('input'));
       tick(500);
       expect(component.filterChange.emit).toHaveBeenCalledWith(name1);
-  
       input.value = name2;
       jest.spyOn(component.filterChange, 'emit').mockImplementation(() => name2);
       input.dispatchEvent(new Event('input'));
       tick(500);
-  
+      
       expect(component.filterChange.emit).toHaveBeenCalledWith(name2);
       expect(component.filterChange.emit).toHaveBeenCalledTimes(2);
     }));

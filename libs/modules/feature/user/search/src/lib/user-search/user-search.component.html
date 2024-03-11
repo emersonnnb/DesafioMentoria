@@ -25,12 +25,14 @@
       </th>
       <td class="td-space" mat-cell *matCellDef="let element; let index = $index " [tabindex]="index">
         @if (element[column.dataKey].includes('https://')) {
-          <img
-            mat-card-image
-            [src]="element[column.dataKey]"
-            [alt]="element[column.dataKey]"
-            class="img-round img-full"
-          />
+        <img
+          priority
+          class="img-round img-full"
+          mat-card-image
+          format="jpg"
+          [ngSrc]="element[column.dataKey]"
+          [alt]="element[column.title]"
+        />
         } @else {
           {{ element[column.dataKey] }}
         }
