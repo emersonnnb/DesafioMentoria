@@ -60,7 +60,7 @@ npx nx affected:test
 npx nx affected:graph
 ```
 
-## Graph Monorepo
+## Gráfico Monorepo - Ecommerce
 ![alt text](https://github.com/emersonnnb/DesafioMentoria/blob/Master/apps/ecommerce-admin/src/assets/graph.png?raw=true)
 
 ## E-commerce Painel Administrativo
