@@ -1,87 +1,81 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
+import {
+    ComponentFixture,
+    TestBed,
+    fakeAsync,
+    tick,
+  } from '@angular/core/testing';
+  import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UserSearchComponent } from './user-search.component';
-import { UserSearchService, mockUsers } from 'user-data-access';
-import { of } from 'rxjs';
-import { UserFilterComponent } from '../user-filter/user-filter.component';
-import { By } from '@angular/platform-browser';
+import { UserListComponent } from '../user-list/user-list.component';
+import { mockUsers } from 'user-data-access';
+import { MatTableDataSource } from '@angular/material/table';
+  
+  describe('UserSearchComponent', () => {
+    let component: UserSearchComponent;
+    let fixture: ComponentFixture<UserSearchComponent>;
+  
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
+        imports: [UserSearchComponent, UserListComponent, NoopAnimationsModule],
+      }).compileComponents();
+  
+      fixture = TestBed.createComponent(UserSearchComponent);
+      component = fixture.componentInstance;
 
-describe('UserSearchComponent', () => {
-  let component: UserSearchComponent;
-  let fixture: ComponentFixture<UserSearchComponent>;
+      component.dataSource = new MatTableDataSource(mockUsers);
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [UserSearchComponent, UserFilterComponent, NoopAnimationsModule],
-      providers: [
-        {
-          provide: UserSearchService,
-          useValue: { getUsers: () => of(mockUsers) },
-        },
-      ],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(UserSearchComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it(`#should create ${UserSearchComponent.name}`, () => {
-    expect(component).toBeTruthy();
-  });
-
-  it(`#${UserSearchComponent.prototype.ngOnInit.name} should fetch users from ${UserSearchComponent.name} on initialization`, () => {
-    component.ngOnInit();
-
-    const users: HTMLElement[] =
-      fixture.nativeElement.querySelectorAll('tbody tr');
-
-    expect(users.length).toBe(mockUsers.length);
-  });
-
-  it(`#${UserSearchComponent.prototype.ngAfterViewInit.name} initialize the filter and table pagination`, () => {
-    component.sort.active = 'id';
-    component.sort.direction = 'desc';
-    component.sort.sortChange.emit({
-      active: component.sort.active,
-      direction: component.sort.direction,
+      fixture.detectChanges();
     });
-
-    component.ngAfterViewInit();
-
-    const user: HTMLElement =
-      fixture.nativeElement.querySelector('tbody tr td');
-
-    expect(component.dataSource.paginator?.length).toBe(mockUsers.length);
-    expect(+user.textContent!).toBe(mockUsers.length);
-  });
-
-  it(`#${UserSearchComponent.prototype.onFilterChange.name} should search for the user entered.`, () => {
-    const input: string = 'Rebecca';
-    component.onFilterChange(input);
-
-    const users: HTMLElement[] =
-      fixture.nativeElement.querySelectorAll('tbody tr');
-
-    mockUsers.filter((el) => 
-      el.name.includes(input) ||
-      el.id.includes(input) ||
-      el.biography.includes(input) ||
-      el.avatar.includes(input) ||
-      el.email.includes(input));
-
-    expect(users.length).toBe(mockUsers.length);
-  });
-
-  it(`#should filter the table based on the value of ${UserFilterComponent.name}`, () => {
-    const filterValue: string = 'Rebecca';
-    const userFilterComponent = fixture.debugElement.query(By.directive(UserFilterComponent));
   
-    userFilterComponent.triggerEventHandler('filterChange', filterValue);
+    it(`#should create ${UserSearchComponent.name}`, () => {
+      expect(component).toBeTruthy();
+    });
   
-    fixture.detectChanges();
-
-    expect(component.dataSource.filter).toBe(filterValue.trim().toLowerCase());
+    it(`#${UserSearchComponent.name} should debounce when input field is changed`, fakeAsync(() => {
+        const name: string = 'li';
+        const input: HTMLInputElement =
+          fixture.nativeElement.querySelector('input');
+        input.value = name;
+        jest.spyOn(component.filterChange, 'emit').mockImplementation(() => name);
+      input.dispatchEvent(new Event('input'));
+      expect(component.filterChange.emit).not.toHaveBeenCalled();
+      tick(500);
+      expect(component.filterChange.emit).toHaveBeenCalledWith(input.value);
+    }));
+  
+    it(`#${UserSearchComponent.name} should search multiple times`, fakeAsync(() => {
+        const name1: string = 'Rebecca';
+        const name2: string = 'Kuhic';
+      const input: HTMLInputElement =
+        fixture.nativeElement.querySelector('input');
+      input.value = name1;
+      jest.spyOn(component.filterChange, 'emit').mockImplementation(() => name1);
+      input.dispatchEvent(new Event('input'));
+      tick(500);
+      expect(component.filterChange.emit).toHaveBeenCalledWith(name1);
+      input.value = name2;
+      jest.spyOn(component.filterChange, 'emit').mockImplementation(() => name2);
+      input.dispatchEvent(new Event('input'));
+      tick(500);
+      
+      expect(component.filterChange.emit).toHaveBeenCalledWith(name2);
+      expect(component.filterChange.emit).toHaveBeenCalledTimes(2);
+    }));
+  
+    it(`#${UserSearchComponent.name} should prevent identical emissions`, fakeAsync(() => {
+        const name: string = 'Kuhic';
+      const input: HTMLInputElement =
+        fixture.nativeElement.querySelector('input');
+      input.value = name;
+      jest.spyOn(component.filterChange, 'emit').mockImplementation(() => name);
+      input.dispatchEvent(new Event('input'));
+      tick(500);
+  
+      input.value = name;
+      input.dispatchEvent(new Event('input'));
+      tick(500);
+  
+      expect(component.filterChange.emit).toHaveBeenCalledTimes(1);
+    }));
   });
-});
+  
