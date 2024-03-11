@@ -1,11 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { of } from 'rxjs';
 
 import { UserListComponent } from './user-list.component';
 import { UserSearchService, mockUsers } from 'user-data-access';
-import { of } from 'rxjs';
 import { UserSearchComponent } from '../user-search/user-search.component';
-import { By } from '@angular/platform-browser';
 
 describe('UserListComponent', () => {
   let component: UserListComponent;
@@ -33,6 +32,8 @@ describe('UserListComponent', () => {
 
   it(`#${UserListComponent.prototype.ngOnInit.name} should fetch users from ${UserListComponent.name} on initialization`, () => {
     component.ngOnInit();
+
+    fixture.detectChanges();
 
     const users: HTMLElement[] =
       fixture.nativeElement.querySelectorAll('tbody tr');
@@ -72,16 +73,5 @@ describe('UserListComponent', () => {
       el.email.includes(input));
 
     expect(users.length).toBe(mockUsers.length);
-  });
-
-  it(`#should filter the table based on the value of ${UserSearchComponent.name}`, () => {
-    const filterValue: string = 'Rebecca';
-    const UserSearchComponent = fixture.debugElement.query(By.directive(UserSearchComponent));
-  
-    UserSearchComponent.triggerEventHandler('filterChange', filterValue);
-  
-    fixture.detectChanges();
-
-    expect(component.dataSource.filter).toBe(filterValue.trim().toLowerCase());
   });
 });

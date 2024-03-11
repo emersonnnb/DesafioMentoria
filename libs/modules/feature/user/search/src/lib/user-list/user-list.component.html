@@ -32,7 +32,7 @@
           class="img-round img-full"
           mat-card-image
           [ngSrc]="element[column.dataKey]"
-          [alt]="element[column.title]"
+          [attr.alt]="element[column.title]"
         />
         } @else {
           {{ element[column.dataKey] }}
