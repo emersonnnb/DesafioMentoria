@@ -24,12 +24,13 @@
         {{ column.title }}
       </th>
       <td class="td-space" mat-cell *matCellDef="let element; let index = $index " [tabindex]="index">
-        @if (element[column.dataKey].includes('https://')) {
+        @if (element[column.dataKey].includes('.jpg')) {
         <img
           priority
+          width="64"
+          height="64"
           class="img-round img-full"
           mat-card-image
-          format="jpg"
           [ngSrc]="element[column.dataKey]"
           [alt]="element[column.title]"
         />

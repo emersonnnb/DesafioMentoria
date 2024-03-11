@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, DestroyRef, OnInit, ViewChild, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, provideImgixLoader } from '@angular/common';
 import { NgOptimizedImage } from '@angular/common'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -10,7 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 
 import { UserSearchService } from 'user-data-access';
-import { DATATABLE, DATATABLEKEY } from '../constant/user-list.const';
+import { DATATABLE, DATATABLEKEY, URL_BASE_IMAGES } from '../constant/user-list.const';
 import { User } from 'libs/modules/data-access/user/src/lib/models/user.model';
 import { UserSearchComponent } from '../user-search/user-search.component';
 
@@ -26,6 +26,9 @@ import { UserSearchComponent } from '../user-search/user-search.component';
     MatFormFieldModule,
     UserSearchComponent,
     NgOptimizedImage
+  ],
+  providers: [
+    provideImgixLoader(URL_BASE_IMAGES)
   ],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss',
@@ -50,8 +53,12 @@ export class UserListComponent implements OnInit, AfterViewInit {
   private loadUsers() {
     this.userSearchService.getUsers()
     .pipe(takeUntilDestroyed(this.destroyRef))
-    .subscribe(res => {
-      this.dataSource.data = res;
+    .subscribe((res: User[]) => {
+      const users: User[] = res.map(user => ({
+        ...user,
+        avatar: user.avatar.slice(URL_BASE_IMAGES.length)
+      }))
+      this.dataSource.data = users;
     });
   }
 

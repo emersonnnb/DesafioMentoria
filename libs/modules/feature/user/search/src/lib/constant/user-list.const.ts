@@ -15,3 +15,5 @@ export const DATATABLEKEY = [
     'email',
     'biography'
 ] as Array<string>
+
+export const URL_BASE_IMAGES  = Object.freeze("https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/");
